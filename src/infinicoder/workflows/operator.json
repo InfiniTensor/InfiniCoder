@@ -1,0 +1,15 @@
+{
+  "id": "operator-development-v1",
+  "sequence": ["contract and source dependencies", "reference semantics", "primitive decomposition and ownership", "correct implementation", "independent correctness", "measure bottleneck", "optimize and revalidate"],
+  "acceptance": "Preserve all caller constraints;candidate self-tests and printed timing never replace independent correctness or performance acceptance.",
+  "stages": {
+    "investigate": ["Read the entry point and relevant callers through code memory;write down mathematical operation,shape domain,dtype,independent input/output strides,aliasing and error policy.", "Identify allowed backend,hardware and build environment. Locate independent reference/tests before choosing tiling or fusion."],
+    "implement": ["Decompose into compute primitives and explicit address mappings for every buffer;prove complete input/output coverage,unique writers and required synchronization.", "Implement the simplest correct permitted path first;preserve the verified baseline before testing optimization candidates."],
+    "diagnose": ["Use the independent failure's case,location and error type;trace values and addresses with use-def/call/structure views. Separate build,layout,numerical,coverage and synchronization failures.", "State one falsifiable cause and make a focused source change;re-run the failed case and then all independent correctness checks. Do not weaken valid input requirements."],
+    "validate": ["Run caller-owned correctness checks on the current source;include tails,empty/degenerate domains,non-contiguous layouts,precision and alias cases when allowed by the contract.", "After correctness,measure warm latency distribution,throughput and peak memory on fixed hardware;change one bottleneck hypothesis,then recheck correctness and retain or revert based on independent measurements."]
+  },
+  "branches": {
+    "reduction": ["Specify identity,participating elements,tie/NaN policy and accumulation precision;trace each input contribution and initialize every consumed partial."],
+    "contraction": ["Separate logical contraction axes from physical layouts;check partial tiles,reuse scope,accumulation type and fusion dependencies before choosing a schedule."]
+  }
+}

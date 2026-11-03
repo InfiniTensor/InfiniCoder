@@ -1,0 +1,28 @@
+{
+  "original_product_commit": "1fb6b168f300e52e07409ede815f3ca3e01aff5c",
+  "original_lowerer_sha256": "d0c0f36152ba02f45bc315a94c20225ffa89006abddfe0cd5937653f35879e5a",
+  "owned_examples_not_benchmark_answers": true,
+  "examples": [
+    {
+      "source": "import torch\nimport torch.nn as nn\nclass Model(nn.Module):\n    def forward(self,x):\n        return torch.sum(x,dim=0)\n",
+      "schedule_sha256": {
+        "scalar": "b8442ebf4c4ee0ed4a99c29d645bb79b9386c16840e35c9cdaafb213a5064b0a",
+        "coalesced": "473bf9a17da17b3267409058bc5175bc59979a5b1d7be5bd01e199af2297e315"
+      }
+    },
+    {
+      "source": "import torch\nimport torch.nn as nn\nclass Model(nn.Module):\n    def forward(self,x):\n        return x.sum(dim=-1,keepdim=True)\n",
+      "schedule_sha256": {
+        "scalar": "5c87e72763675cbe282c2b713bbf80aae4946c68fa3e3d7d7aeabfc31302b022",
+        "coalesced": "fb57d000d7c57f8b95ee6a2d7689d2104bc93acbe71260adc2d1b6096d1fd38f"
+      }
+    },
+    {
+      "source": "import torch\nimport torch.nn as nn\nclass Model(nn.Module):\n    def __init__(self,axis:int=1):\n        super().__init__()\n        self.axis=axis\n    def forward(self,x):\n        return torch.sum(x,dim=self.axis)\ndef get_init_inputs():\n    return [1]\n",
+      "schedule_sha256": {
+        "scalar": "edd378ae1ff3da4a45e9e441aa28c66293e28708d8e019121214c72c49739d2b",
+        "coalesced": "a6d2f84644feddfad70a044a4fa1e467c0d9bc58df8c91dbb095a4c0df8236e8"
+      }
+    }
+  ]
+}

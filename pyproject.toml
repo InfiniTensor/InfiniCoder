@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "infinicoder"
+version = "0.8.0a11"
+description = "Evidence-driven coding runtime with persistent multi-view code context"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_NOTICES"]
+authors = [{name = "InfiniTensor"}]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development",
+]
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+native = ["libclang==18.1.1"]
+native_tools = ["jsonschema==4.25.1"]
+text = ["jinja2==3.1.6", "pydantic==2.14.2", "filelock==4.2.6"]
+native_run = ["jinja2==3.1.6", "pydantic==2.14.2", "filelock==4.2.6"]
+native_cpu = ["jinja2==3.1.6", "pydantic==2.14.2", "filelock==4.2.6", "transformers==5.19.0"]
+tokenizer = ["transformers==5.19.0", "filelock==4.2.6"]
+full = ["libclang==18.1.1", "transformers==5.19.0", "jsonschema==4.25.1", "jinja2==3.1.6", "pydantic==2.14.2", "filelock==4.2.6"]
+
+[project.scripts]
+infinicoder = "infinicoder.app.cli:main"
+infinicoder-context = "infinicoder.analysis.code_context:main"
+infinicoder-session = "infinicoder.app.session_cli:main"
+infinicoder-adaptive = "infinicoder.app.adaptive:main"
+infinicoder-native = "infinicoder.app.native_cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+exclude = ["infinicoder.legacy*"]
+
+[tool.setuptools.package-data]
+infinicoder = ["native_defaults.json", "capabilities/*.json", "knowledge/*.md", "workflows/*.json"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E9", "F"]

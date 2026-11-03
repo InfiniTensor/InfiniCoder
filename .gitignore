@@ -1,0 +1,23 @@
+.ruff_cache/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+review_results/
+runs/
+artifacts/
+vendor/
+*.sqlite*
+*.lock
+
+# Local evaluation and release preparation only
+review_tools/
+benchmarks/
+operations/
+deliveries/
+*.log
+.env
+.env.*
+!.env.example

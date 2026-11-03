@@ -1,0 +1,11 @@
+include README.md LICENSE NOTICE THIRD_PARTY_NOTICES CONTRIBUTING.md SECURITY.md pyproject.toml
+recursive-include src *.py *.json *.md
+recursive-include tests *.py *.json
+recursive-include docs/guide *.md
+recursive-include examples *.py *.json *.md
+prune src/infinicoder/legacy
+prune operations
+prune review_tools
+prune benchmarks
+prune InfiniCoder-review
+global-exclude __pycache__ *.py[cod] *.sqlite *.sqlite3 *.lock

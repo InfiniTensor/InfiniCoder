@@ -1,0 +1,23 @@
+{
+  "id": "system",
+  "description": "Framework-independent system development contract",
+  "obligations": [
+    "Map components, public interfaces and runtime call paths before changing a system.",
+    "Record important data structures, their owner, readers/writers, lifetime and invariants.",
+    "Model state transitions, concurrency, cancellation, failure propagation and resource cleanup where relevant.",
+    "Specify compatibility and migration requirements for public APIs, serialization and persisted state.",
+    "Build a small vertical slice across module boundaries before expanding independent components.",
+    "Use measured workload and bottleneck evidence to guide optimization rather than framework-specific guesses."
+  ],
+  "checks": [
+    "Public API and consumer compatibility",
+    "Cross-component contract and integration tests",
+    "Error injection, cancellation and cleanup when applicable",
+    "State consistency and concurrency invariants when applicable",
+    "Regression against a named baseline and realistic workload performance"
+  ],
+  "seed_policy": {
+    "required_metadata": ["interfaces", "ownership", "state_model", "dependencies", "preconditions", "verification_evidence"],
+    "reuse": "Reuse mechanisms only after matching lifecycle and interface constraints; verify integration in the new system."
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "task": "Implement stable_unique(items): return the first occurrence of each item in order without changing the input. Items are hashable.",
+  "allowed_paths": ["solution.py"],
+  "required_artifacts": ["solution.py"],
+  "checks": [{"id": "acceptance", "argv": ["python", "-m", "unittest", "discover", "-s", "tests", "-q"], "timeout": 30}]
+}

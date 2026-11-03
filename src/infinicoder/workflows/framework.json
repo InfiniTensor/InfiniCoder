@@ -1,0 +1,17 @@
+{
+  "id": "framework-development-v1",
+  "sequence": ["trace real call and data path", "specify interfaces,state and ownership", "plan independently testable modules", "implement runnable vertical slice", "integrate and inject failures", "measure end-to-end behavior"],
+  "acceptance": "External final integration checks remain mandatory across all modules;syntax or a model-created unit test cannot certify system correctness.",
+  "stages": {
+    "investigate": ["Use module routing,call references,structures and use-def to trace the actual entry point to state owners;read interfaces,build registration and tests rather than guessing same-name implementations.", "Record invariants,initialization/update/cleanup transitions and failure propagation. For multi-module implementation,propose dependency-ordered deliverables with interfaces and external validation."],
+    "implement": ["Implement a runnable vertical slice with explicit ownership and stable module interfaces;use the existing validated plan for cross-module work.", "Check callers and callees together;when an interface or assumption is wrong,repair/replan the responsible module instead of repeatedly patching the last consumer."],
+    "diagnose": ["Classify the external failure as build/interface,numerical/state,lifetime/concurrency or performance;trace its producer and consumer through memory before editing.", "Form a falsifiable hypothesis,inspect current source and make a local repair;re-run the failing integration and the final cross-module acceptance."],
+    "validate": ["Check real build/registration and a deterministic end-to-end slice;exercise empty work,partial failure,cancellation,retry and repeated cleanup where applicable.", "Measure fixed-work end-to-end latency,throughput and memory only after correctness;preserve the independent baseline and revert regressions."]
+  },
+  "branches": {
+    "checkpoint": ["Run the caller-bound public save/load/continue procedure when supplied;compare split state before continuation,and each resumed output/state with uninterrupted execution.", "Trace the reported component back to its state owner: parameters,optimizer buffers,scheduler,RNG or data position. Loading without an exception does not establish recovery equivalence. Keep unsupported components and nondeterminism explicit."],
+    "training": ["Specify mathematical update and state step order;compare loss,gradients,parameters and optimizer state against an independent reference across multiple steps.", "Check sample/token normalization,unequal microbatches,accumulation boundaries,mixed precision and collective order;do not infer multi-GPU validity from a local scalar test."],
+    "inference": ["Trace prefill/decode,admission,KV allocation/sharing/reclamation and output ordering;test capacity,stale handles,cancellation and partial batches."],
+    "concurrency": ["Specify lock/resource ownership and happens-before edges;test contention,zero-work ranks,failures and shutdown without relying on happy-path output alone."]
+  }
+}

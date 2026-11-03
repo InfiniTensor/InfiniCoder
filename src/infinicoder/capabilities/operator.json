@@ -1,0 +1,23 @@
+{
+  "id": "operator",
+  "description": "Hardware-independent operator development contract",
+  "obligations": [
+    "Specify mathematical semantics, shape constraints, dtype, strides/layout, aliasing and mutation rules.",
+    "Specify accumulation precision, tolerances, NaN/Inf behavior and deterministic requirements before optimization.",
+    "Decompose by computation primitives and data dependencies: map, reduction, scan, gather/scatter, tiling, synchronization. Select only applicable primitives.",
+    "Obtain hardware/compiler/runtime facts from supplied configuration or measured environment; do not assume device names, bandwidth, vector width or remote hosts.",
+    "Establish a simple correct reference and independently verified implementation before optimizing.",
+    "Measure traffic, work, launch/synchronization costs and bottlenecks. Change one optimization at a time, recheck correctness and compare repeated timings."
+  ],
+  "checks": [
+    "Independent reference comparison across normal, boundary and randomized inputs",
+    "Non-contiguous layouts and tail sizes when allowed by the declared contract",
+    "Numeric error distribution using a trusted checker, not a candidate-produced PASSED string",
+    "Memory/race checks supported by the target tooling",
+    "Reproducible warmup, synchronization, benchmark inputs and baseline; report spread as well as central latency"
+  ],
+  "seed_policy": {
+    "required_metadata": ["semantic_contract", "target_constraints", "preconditions", "invariants", "verification_evidence", "source_revision"],
+    "reuse": "Check every precondition against the new task; mismatch requires adaptation and fresh verification. A similar name is not compatibility."
+  }
+}
